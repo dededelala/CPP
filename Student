@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>>
+
 using namespace std;
 
 class Student
@@ -60,6 +61,7 @@ void Class::showall()
     for(int i=0;i<stu_count;i++)
         stu[i].show();
 }
+
 int Class::search(char name[])
 {
     int s=0;
@@ -81,12 +83,10 @@ int Class::search(char name[])
     }
 
 }
+
 void Class::addscore(int n,int score)
 {
-
-
     stu[n].stu_score=stu[n].stu_score+score;
-
 }
 
 
@@ -99,14 +99,11 @@ int main()
     int score,average;
    while(1)
    {
+    cout<<"请输入学生姓名 学号 分数 学分"<<endl;
     Student a(0,0);
-
     cin>>name;
     cin>>num>>score>>average;
-
     a.setinfo(name,num,score,average);
-
-
     A.stu[A.stu_count++]=a;
     a.show();
     cout<<"输入1继续，0终止建立"<<endl;
@@ -115,9 +112,7 @@ int main()
         continue;
     else
         break;
-
    }
-
     A.showall();
     cout<<"输入要查询的学生名字"<<endl;
     cin>>name;
@@ -128,6 +123,5 @@ int main()
     A.addscore(n,add);
     A.stu[n].show();
     return 0;
-
 }
 
