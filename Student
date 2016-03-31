@@ -3,27 +3,26 @@
 
 using namespace std;
 
-class Student
+class Student//定义学生类
 {
 public:
-    Student(int score,int average)
+    Student(int score,int average)//构造函数，初始化姓名学号，学分分数清零
     {
         stu_name[0]='\0';
         stu_num=0;
         stu_score=score;
         stu_average=stu_average;
     }
-    void setinfo(char name[10],long num,int score,int average)
+    void setinfo(char name[10],long num,int score,int average)//设置学生信息
     {
 
         name[strlen(name)]='\0';
-
         strcpy(stu_name,name);
         stu_num=num;
         stu_score=score;
         stu_average=average;
     }
-    void show()
+    void show()//打印某个学生的信息
     {
         cout<<stu_name<<"\t"<<stu_num<<"\t"<<stu_score<<"\t"<<stu_average<<endl;
     }
@@ -35,19 +34,14 @@ public:
     int stu_average;
 };
 
-class Class
+class Class//定义班级类
 {
 public:
-    int stu_count;
-    Student stu[];
-    Class(int count)
+    int stu_count;//学生总数
+    Student stu[];//Class类中的Student类对象数组
+    Class(int count)//构造函数，清零学生总数
     {
         stu_count=count;
-    }
-
-    void showstu(Student stu)
-    {
-        cout<<stu.stu_name<<"\t"<<stu.stu_num<<"\t"<<stu.stu_score<<"\t"<<stu.stu_average<<endl;
     }
 
     void addscore(int n,int score);
@@ -56,13 +50,13 @@ public:
 
 };
 
-void Class::showall()
+void Class::showall()//打印所有学生信息
 {
     for(int i=0;i<stu_count;i++)
         stu[i].show();
 }
 
-int Class::search(char name[])
+int Class::search(char name[])//根据姓名查找
 {
     int s=0;
     for(int i=0;i<stu_count;i++,s=0)
@@ -84,7 +78,7 @@ int Class::search(char name[])
 
 }
 
-void Class::addscore(int n,int score)
+void Class::addscore(int n,int score)//增加分数
 {
     stu[n].stu_score=stu[n].stu_score+score;
 }
@@ -104,7 +98,7 @@ int main()
     cin>>name;
     cin>>num>>score>>average;
     a.setinfo(name,num,score,average);
-    A.stu[A.stu_count++]=a;
+    A.stu[A.stu_count++]=a;//将Student对象赋值给Class类中的Student数组
     a.show();
     cout<<"输入1继续，0终止建立"<<endl;
     cin>>j;
@@ -113,11 +107,10 @@ int main()
     else
         break;
    }
-    A.showall();
     cout<<"输入要查询的学生名字"<<endl;
     cin>>name;
     n=A.search(name);
-    A.stu[n].show();
+    A.stu[n].show();a
     cout<<"输入要增加的学分"<<endl;
     cin>>add;
     A.addscore(n,add);
