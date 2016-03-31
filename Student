@@ -110,7 +110,7 @@ int main()
     cout<<"输入要查询的学生名字"<<endl;
     cin>>name;
     n=A.search(name);
-    A.stu[n].show();a
+    A.stu[n].show();
     cout<<"输入要增加的学分"<<endl;
     cin>>add;
     A.addscore(n,add);
