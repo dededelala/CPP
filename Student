@@ -1,0 +1,133 @@
+#include <iostream>
+#include <string.h>>
+using namespace std;
+
+class Student
+{
+public:
+    Student(int score,int average)
+    {
+        stu_name[0]='\0';
+        stu_num=0;
+        stu_score=score;
+        stu_average=stu_average;
+    }
+    void setinfo(char name[10],long num,int score,int average)
+    {
+
+        name[strlen(name)]='\0';
+
+        strcpy(stu_name,name);
+        stu_num=num;
+        stu_score=score;
+        stu_average=average;
+    }
+    void show()
+    {
+        cout<<stu_name<<"\t"<<stu_num<<"\t"<<stu_score<<"\t"<<stu_average<<endl;
+    }
+
+
+    char stu_name[10];
+    long stu_num;
+    int stu_score;
+    int stu_average;
+};
+
+class Class
+{
+public:
+    int stu_count;
+    Student stu[];
+    Class(int count)
+    {
+        stu_count=count;
+    }
+
+    void showstu(Student stu)
+    {
+        cout<<stu.stu_name<<"\t"<<stu.stu_num<<"\t"<<stu.stu_score<<"\t"<<stu.stu_average<<endl;
+    }
+
+    void addscore(int n,int score);
+    int search(char name[]);
+    void showall();
+
+};
+
+void Class::showall()
+{
+    for(int i=0;i<stu_count;i++)
+        stu[i].show();
+}
+int Class::search(char name[])
+{
+    int s=0;
+    for(int i=0;i<stu_count;i++,s=0)
+    {
+         for(int j=0;j<strlen(name);j++)
+            {
+                if(stu[i].stu_name[j]!=name[j])
+                {
+                    s=1;
+                    break;
+                }
+
+         }
+         if(s==0)
+         {
+             return i;
+         }
+    }
+
+}
+void Class::addscore(int n,int score)
+{
+
+
+    stu[n].stu_score=stu[n].stu_score+score;
+
+}
+
+
+int main()
+{
+   int n,j,add;
+   Class A(0);
+   char name[10];
+    long num;
+    int score,average;
+   while(1)
+   {
+    Student a(0,0);
+
+    cin>>name;
+    cin>>num>>score>>average;
+
+    a.setinfo(name,num,score,average);
+
+
+    A.stu[A.stu_count++]=a;
+    a.show();
+    cout<<"输入1继续，0终止建立"<<endl;
+    cin>>j;
+    if(j==1)
+        continue;
+    else
+        break;
+
+   }
+
+    A.showall();
+    cout<<"输入要查询的学生名字"<<endl;
+    cin>>name;
+    n=A.search(name);
+    A.stu[n].show();
+    cout<<"输入要增加的学分"<<endl;
+    cin>>add;
+    A.addscore(n,add);
+    A.stu[n].show();
+    return 0;
+
+}
+
