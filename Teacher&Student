@@ -1,0 +1,193 @@
+#include <iostream>
+#include<string>
+
+using namespace std;
+
+class Person
+{
+private:
+    char name[100];
+    long id;
+public:
+    Person(long n=0){id=n;};
+    void input()
+    {
+        cout<<"请输入姓名与身份证号"<<endl;
+        cin>>name;
+
+        cin>>id;
+    }
+    string getname()
+    {
+        return name;
+    }
+    void print()
+    {
+        cout<<name<<"\t"<<id<<"\t\t";
+    }
+};
+
+class Teacher:public Person
+{
+private:
+    int degree;
+    char Dep[100];
+
+public:
+    Teacher(int n=0):Person(n){degree=n;Dep[0]='\0';};
+    void input()
+    {
+           Person::input();
+           cout<<"请输入年级与部门"<<endl;
+        cin>>degree>>Dep;
+
+    }
+    void print()
+    {
+        Person::print();
+        cout<<degree<<"\t"<<Dep<<"\t";
+    }
+};
+
+class Student:public Person
+{
+private:
+    int age;
+    long stuNum;
+
+public:
+    Student(int n=0,long i=0):Person(n){age=n;stuNum=i;};
+    void input()
+    {
+        Person::input();
+        cout<<"请输入年龄与学号"<<endl;
+        cin>>age>>stuNum;
+    }
+    void print()
+    {
+        Person::print();
+        cout<<age<<"\t"<<stuNum<<"\t";
+    }
+};
+
+class Tutor:public Teacher
+{
+private:
+
+
+    int meetingTimes;
+public:
+    int stun;
+    int num[];
+    Tutor(int n=0):Teacher(n){meetingTimes=n;};
+    void input()
+    {
+        Teacher::input();
+        cout<<"请输入学生数量"<<endl;
+
+        cin>>stun;
+        for(int i=0;i<stun;i++)
+        {
+            cout<<"请输入第"<<i+1<<"个学生的编号"<<endl;
+            cin>>num[i];
+        }
+        cout<<"请输入课时"<<endl;
+        cin>>meetingTimes;
+    }
+    void print()
+    {
+        Teacher::print();
+        cout<<meetingTimes<<endl;
+    }
+};
+
+class ST_Score:public Student
+{
+private:
+    int math,english;
+
+public:
+    ST_Score(int i=0,int j=0):Student(i,j){math=i;english=j;};
+    void input()
+    {
+        Student::input();
+        cout<<"请输入数学与英语成绩"<<endl;
+        cin>>math>>english;
+
+    }
+    void print()
+    {
+        Student::print();
+        cout<<math<<"\t"<<english<<endl;
+    }
+    void change(int i,int j)
+    {
+        math=(math+i)/2;
+        english=(english+j)/2;
+    }
+};
+int main()
+{
+    int i,j,n,stu_count=0,tea_count=0;
+    ST_Score a[100];
+    Tutor b[100];
+
+    while(1)
+    {
+        cout<<"输入1添加学生，2添加老师"<<endl;
+        cin>>n;
+        if(n==1)
+        {
+            a[stu_count].input();
+            stu_count++;
+        }
+        else
+        {
+            b[tea_count].input();
+            tea_count++;
+        }
+        cout<<"输入1继续，0退出并输出"<<endl;
+        cin>>n;
+        if(n==1)
+            continue;
+        else
+            break;
+
+    }
+    cout<<"学生信息："<<"\n"<<"编号\t姓名\t身份证号\t年龄\t学号\t数学成绩\t英语成绩"<<endl;
+    for(i=0;i<stu_count;i++)
+    {
+        cout<<i+1<<"\t";
+        a[i].print();
+    }
+    cout<<"老师信息："<<"\n"<<"编号\t姓名\t身份证号\t年龄\t部门\t课时"<<endl;
+    for(i=0;i<tea_count;i++)
+    {
+        cout<<i+1<<"\t";
+        b[i].print();
+        cout<<"学生姓名为："<<endl;
+        for(j=0;j<b[i].stun;j++)
+        {
+            cout<<a[b[i].num[j]-1].getname()<<"\t";
+        }
+        cout<<endl;
+    }
+    while(1)
+    {
+        cout<<"修改成绩请输入1,0退出"<<endl;
+    cin>>n;
+
+    if(n==0)
+        return 0;
+    else
+    {
+        cout<<"输入学生编号"<<endl;
+        cin>>n;
+        cout<<"输入成绩"<<endl;
+        cin>>i>>j;
+        a[n-1].change(i,j);
+        cout<<"学生信息："<<"\n"<<"编号\t姓名\t身份证号\t年龄\t学号\t数学成绩\t英语成绩"<<endl;
+        a[n-1].print();
+    }
+    }
+}
