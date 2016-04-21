@@ -1,3 +1,2 @@
 # CPP
-scdfasdfcddsadf
-sdfc
+Project written by C++
